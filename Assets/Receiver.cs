@@ -11,7 +11,7 @@ using System.Linq;
 
 public class Receiver : MonoBehaviour
 {
-    string savePath = "ReceivedFiles\\received.obj";
+    string savePath;// = Application.persistentDataPath + "/TransferDirectory/received.obj"; Can only do this in Start()
     int port = 8111;
 
     bool fileReadyFlag = false;
@@ -69,11 +69,12 @@ public class Receiver : MonoBehaviour
     async void Start()
     {
         Debug.Log("Hello, World!");
+        savePath = Application.persistentDataPath + "/TransferDirectory/received.obj"; // TODO: MAKE IT CREATE TransferDirectory IF IT DOESN'T EXIST!!
         await ReceiveFileAsync(savePath, port);
     }
 
     float timer = 0.0f;
-    float interval = 1.0f; // This is the interval in seconds. 0.5 seconds means 2 times per second.
+    float interval = 8.0f; // This is the interval in seconds. 0.5 seconds means 2 times per second.
 
     // Update is called once per frame
     void Update()
